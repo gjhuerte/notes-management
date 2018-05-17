@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Auth;
 
 class Note extends Model
@@ -30,6 +32,20 @@ class Note extends Model
             'details' => 'max:500',
             'note' => 'required|exists:notes,id'
         ];
+    }
+
+    public function setDetailsAttribute($value)
+    {
+        $this->attributes['details'] = Crypt::encryptString($value);
+    }
+
+    public function getDetailsAttribute($value)
+    {
+        if(Auth::user()->id == $this->user_id)
+            return Crypt::decryptString($value);
+        else
+            return $value;
+
     }
 
     public function existRules()

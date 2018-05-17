@@ -18,7 +18,7 @@
 
         <div class="clearfix"></div>
 
-        @forelse($notes as $note)
+        @if(count($note) >)
         <div class="col-md-4 mt-2 d-flex align-items-stretch">
             <div class="card bg-light">
 
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        @endforelse
+        @end
 
         <div class="clearfix"></div>
     </div>

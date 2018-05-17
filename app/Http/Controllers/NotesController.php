@@ -72,7 +72,9 @@ class NotesController extends Controller
      */
     public function show($id)
     {
-        //
+        $note = App\Note::find($id);
+        return view('note.show')
+                ->with('note', $note);
     }
 
     /**
